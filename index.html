@@ -12,8 +12,8 @@
 </head>
 <body>
 
-    <!-- Audio element (hidden) -->
-    <audio id="bdaySong" src="song.mp3" preload="auto"></audio>
+    <!-- Audio element (ensure song.mp3 is in your repository) -->
+    <audio id="bdaySong" src="song.mp3"></audio>
 
     <div id="step1" class="step active">
         <h1>Hello Annu!</h1>
@@ -27,21 +27,19 @@
 
     <div id="step3" class="step">
         <h1>Happy Birthday Anamika! 🎉</h1>
-        <button onclick="finish()">Celebrate!</button>
+        <button onclick="finish()">Click to celebrate!</button>
     </div>
 
     <script>
         function nextStep(step) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
-            
-            // Start audio on first interaction
-            if (step === 2) {
-                document.getElementById('bdaySong').play();
-            }
         }
 
         function finish() {
+            // Start audio when "Click to celebrate" is clicked
+            document.getElementById('bdaySong').play();
+            // Trigger confetti
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
     </script>
