@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Happy Birthday!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise for Annu</title>
+    <!-- Importing the Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -11,34 +14,96 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec;
-            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8; /* Soft blue-grey background */
+            font-family: 'Poppins', sans-serif; /* A nice, clean font */
+            overflow: hidden; /* Keep the character animation contained */
         }
-        h1 { color: #d81b60; margin-bottom: 20px; }
+
+        /* 1. The Character Container */
+        #character-container {
+            position: absolute;
+            left: -150px; /* Start off-screen to the left */
+            bottom: 20%;
+            width: 150px; /* Size of the character GIF */
+            height: 150px;
+            /* Simple Walking Animation */
+            animation: walkToCenter 4s ease-out forwards;
+            z-index: 10;
+        }
+
+        /* Define the walking movement */
+        @keyframes walkToCenter {
+            0% { left: -150px; }
+            100% { left: 50%; transform: translateX(-50%); } /* Stop in the middle */
+        }
+
+        /* The actual GIF image */
+        #birthday-character {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 2. The Text and Button Container (Hidden Initially) */
+        #message-container {
+            text-align: center;
+            opacity: 0; /* Invisible at start */
+            animation: fadeIn 2s ease-in 4.5s forwards; /* Fades in AFTER the walk */
+            z-index: 5;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
         button {
-            padding: 15px 30px;
+            padding: 15px 40px;
             font-size: 1.2rem;
-            background-color: #d81b60;
+            background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            transition: transform 0.2s;
         }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
     </style>
 </head>
 <body>
-    <h1>Happy Birthday Annu! 🎂</h1>
-    <button onclick="celebrate()">Click for a surprise!</button>
+
+    <!-- 1. The Animated Character -->
+    <div id="character-container">
+        <!-- We use a clear, charming GIF of a character with a cake -->
+        <img id="birthday-character" src="https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif" alt="Birthday Friend">
+    </div>
+
+    <!-- 2. The Main Message -->
+    <div id="message-container">
+        <h1>Happy Birthday Annu! 🎉</h1>
+        <button onclick="celebrate()">Click for a big surprise!</button>
+    </div>
 
     <script>
+        // The confetti effect from before
         function celebrate() {
             confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.7 }
             });
         }
     </script>
+
 </body>
 </html>
